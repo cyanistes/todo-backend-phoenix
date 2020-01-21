@@ -2,7 +2,7 @@ defmodule TodoBackendPhoenixWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :todo_backend_phoenix
 
   socket "/socket", TodoBackendPhoenixWeb.UserSocket,
-    websocket: true,
+    websocket: [timeout: 45_000],
     longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
