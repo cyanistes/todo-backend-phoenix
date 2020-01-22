@@ -34,6 +34,19 @@ defmodule TodoBackendPhoenixWeb.TodoController do
     end
   end
 
+  def delete(conn, params = %{"id" => id}) do
+    changeset = Todo.changeset(Repo.get(Todo, id), %{})
+    case Repo.delete(changeset) do
+      {:ok, _todo} ->
+        conn
+        |> redirect(to: Routes.todo_path(conn, :index))
+
+      {:error, _} ->
+        conn
+        |> send_resp(404, "")
+    end
+  end
+
   def delete_all(conn, _params) do
     Repo.delete_all(Todo)
     conn
