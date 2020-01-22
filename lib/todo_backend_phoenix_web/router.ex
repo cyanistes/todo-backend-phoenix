@@ -25,7 +25,10 @@ defmodule TodoBackendPhoenixWeb.Router do
 
     get "/todos", TodoController, :index
     post "/todos", TodoController, :create
+    delete "/todos", TodoController, :delete_all
     options "/todos", TodoController, :options
+    get "/todos/:id", TodoController, :show
+    options "/todos/:id", TodoController, :options
 
   end
 
