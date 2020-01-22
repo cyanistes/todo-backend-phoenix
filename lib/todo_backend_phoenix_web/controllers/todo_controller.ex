@@ -14,14 +14,14 @@ defmodule TodoBackendPhoenixWeb.TodoController do
         conn
         |> redirect(to: Routes.todo_path(conn, :show, todo))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> put_status(422)
         |> render(ErrorView, "422.json")
     end
   end
 
-  def delete_all(conn, params) do
+  def delete_all(conn, _params) do
     Repo.delete_all(Todo)
     conn
     |> send_resp(:ok, "")
