@@ -16,7 +16,8 @@ defmodule TodoBackendPhoenixWeb.TodoView do
     %{
       title: todo.title,
       completed: todo.completed,
-      url: Routes.todo_url(Endpoint, :show, todo.id)
+      url: Routes.todo_url(Endpoint, :show, todo.id),
+      order: todo.order,
     }
   end
 end
