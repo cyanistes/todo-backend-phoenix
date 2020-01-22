@@ -20,6 +20,20 @@ defmodule TodoBackendPhoenixWeb.TodoController do
     end
   end
 
+  def update(conn, todo_params = %{"id" => id}) do
+    todo = Repo.get(Todo, id)
+    changeset = Todo.changeset(todo, todo_params)
+    case Repo.update(changeset) do
+      {:ok, todo} ->
+        conn
+        |> render("show.json", todo: todo)
+
+      {:error, %Ecto.Changeset{} = _changeset} ->
+        conn
+        |> send_resp(422, "")
+    end
+  end
+
   def delete_all(conn, _params) do
     Repo.delete_all(Todo)
     conn
