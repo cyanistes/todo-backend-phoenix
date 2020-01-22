@@ -10,6 +10,7 @@ defmodule TodoBackendPhoenixWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: "*", headers: "Content-Type"
     plug :accepts, ["json"]
   end
 
@@ -17,6 +18,13 @@ defmodule TodoBackendPhoenixWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+  end
+
+  scope "/todos", TodoBackendPhoenixWeb do
+    pipe_through :api
+
+    get "/", TodoController, :index
+
   end
 
   # Other scopes may use custom stacks.
