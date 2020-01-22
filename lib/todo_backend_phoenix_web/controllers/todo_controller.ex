@@ -4,4 +4,8 @@ defmodule TodoBackendPhoenixWeb.TodoController do
   def index(conn, _params) do
     render(conn, "index.json")
   end
+
+  def create(conn, _params) do
+    render(conn, "index.json")
+  end
 end

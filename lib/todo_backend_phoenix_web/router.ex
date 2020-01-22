@@ -23,7 +23,8 @@ defmodule TodoBackendPhoenixWeb.Router do
   scope "/api/v1", TodoBackendPhoenixWeb do
     pipe_through :api
 
-    resources "/todos", TodoController, only: [:index]
+    get "/todos", TodoController, :index
+    post "/todos", TodoController, :create
     options "/todos", TodoController, :options
 
   end
