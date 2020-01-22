@@ -1,7 +1,7 @@
 defmodule TodoBackendPhoenixWeb.TodoController do
   use TodoBackendPhoenixWeb, :controller
 
-  alias TodoBackendPhoenix.{Todo, Repo}
+  alias TodoBackendPhoenix.{Todo, Repo, ErrorView}
   def index(conn, _params) do
     todos = Repo.all(Todo)
     render(conn, "index.json", todos: todos)
@@ -16,8 +16,7 @@ defmodule TodoBackendPhoenixWeb.TodoController do
 
       {:error, %Ecto.Changeset{} = _changeset} ->
         conn
-        |> put_status(422)
-        |> render(ErrorView, "422.json")
+        |> send_resp(422, "")
     end
   end
 

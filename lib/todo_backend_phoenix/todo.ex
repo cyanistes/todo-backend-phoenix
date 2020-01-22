@@ -4,13 +4,14 @@ defmodule TodoBackendPhoenix.Todo do
 
   schema "todos" do
     field :title, :string
+    field :completed, :boolean, default: false
     timestamps()
   end
 
   @doc false
   def changeset(todo, attrs) do
     todo
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :completed])
     |> validate_required([:title])
   end
 end
